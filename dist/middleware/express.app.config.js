@@ -31,10 +31,14 @@ class ExpressAppConfig {
         this.app.use(express.urlencoded({ extended: false }));
         this.app.use(cookieParser());
         const swaggerUi = new swagger_ui_1.SwaggerUI(swaggerDoc, appOptions.swaggerUI);
-        this.app.use(swaggerUi.serveStaticContent());
-        this.app.use(OpenApiValidator.middleware(this.openApiValidatorOptions));
-        this.app.use(new swagger_parameters_1.SwaggerParameters().checkParameters());
-        this.app.use(new swagger_router_1.SwaggerRouter().initialize(this.routingOptions));
+        this.oas3UI = swaggerUi.serveStaticContent();
+        this.app.use(this.oas3UI);
+        this.oas3Validator = OpenApiValidator.middleware(this.openApiValidatorOptions);
+        this.app.use(this.oas3Validator);
+        this.oas3Metadata = new swagger_parameters_1.SwaggerParameters().checkParameters();
+        this.app.use(this.oas3Metadata);
+        this.oas3Router = new swagger_router_1.SwaggerRouter().initialize(this.routingOptions);
+        this.app.use(this.oas3Router);
         this.app.use(this.errorHandler);
     }
     setOpenApiValidatorOptions(definitionPath, appOptions) {
@@ -71,6 +75,14 @@ class ExpressAppConfig {
     }
     getApp() {
         return this.app;
+    }
+    getMiddleware() {
+        return {
+            oas3UI: this.oas3UI,
+            oas3Metadata: this.oas3Metadata,
+            oas3Router: this.oas3Router,
+            oas3Validator: this.oas3Validator
+        };
     }
 }
 exports.ExpressAppConfig = ExpressAppConfig;
