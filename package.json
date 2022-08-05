@@ -1,15 +1,15 @@
 {
   "name": "@HawkenIndustries/oas3-tools",
-  "version": "0.10.8",
+  "version": "0.10.9",
   "description": "Swagger-UI and API Rest Routing for Open API v3.",
   "main": "dist/index.js",
   "scripts": {
     "build": "rm -rf dist/ && tsc && cp -R src/middleware/swagger-ui dist/middleware/swagger-ui"
   },
   "author": {
-    "name": "Hugo Mercado",
-    "email": "hugo.mario.mercado@gmail.com",
-    "url": "https://github.com/HugoMario"
+    "name": "HawkenIO",
+    "email": "support@hawkenio.com",
+    "url": "https://github.com/HawkenIndustries"
   },
   "bugs": {
     "url": "https://github.com/HawkenIndustries/oas3-tools/issues"
