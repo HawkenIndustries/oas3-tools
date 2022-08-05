@@ -5,3 +5,7 @@ import { Oas3AppOptions } from "./middleware/oas3.options";
 export function expressAppConfig(definitionPath: string, appOptions: Oas3AppOptions): ExpressAppConfig {
   return new ExpressAppConfig(definitionPath, appOptions);
 }
+
+export function test(){
+  console.log('test');
+}
