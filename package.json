@@ -1,6 +1,6 @@
 {
-  "name": "@chadhutchins182/oas3-tools",
-  "version": "0.10.7",
+  "name": "@HawkenIndustries/oas3-tools",
+  "version": "0.10.8",
   "description": "Swagger-UI and API Rest Routing for Open API v3.",
   "main": "dist/index.js",
   "scripts": {
@@ -12,16 +12,16 @@
     "url": "https://github.com/HugoMario"
   },
   "bugs": {
-    "url": "https://github.com/chadhutchins182/oas3-tools/issues"
+    "url": "https://github.com/HawkenIndustries/oas3-tools/issues"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
   },
-  "homepage": "https://github.com/chadhutchins182/oas3-tools",
+  "homepage": "https://github.com/HawkenIndustries/oas3-tools",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git@github.com:chadhutchins182/oas3-tools.git"
+    "url": "git@github.com:HawkenIndustries/oas3-tools.git"
   },
   "keywords": [
     "api",
