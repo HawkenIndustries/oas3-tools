@@ -18,6 +18,10 @@ export class ExpressAppConfig {
     private routingOptions;
     private definitionPath;
     private openApiValidatorOptions;
+    private oas3UI;
+    private oas3Validator;
+    private oas3Metadata;
+    private oas3Router;
 
     constructor(definitionPath: string, appOptions: Oas3AppOptions) {
         this.definitionPath = definitionPath;
@@ -43,11 +47,17 @@ export class ExpressAppConfig {
         this.app.use(cookieParser());
 
         const swaggerUi = new SwaggerUI(swaggerDoc, appOptions.swaggerUI);
-        this.app.use(swaggerUi.serveStaticContent());
+        this.oas3UI = swaggerUi.serveStaticContent()
+        this.app.use(this.oas3UI);
 
-        this.app.use(OpenApiValidator.middleware(this.openApiValidatorOptions));
-        this.app.use(new SwaggerParameters().checkParameters());
-        this.app.use(new SwaggerRouter().initialize(this.routingOptions));
+        this.oas3Validator = OpenApiValidator.middleware(this.openApiValidatorOptions);
+        this.app.use(this.oas3Validator);
+
+        this.oas3Metadata = new SwaggerParameters().checkParameters();
+        this.app.use(this.oas3Metadata);
+
+        this.oas3Router = new SwaggerRouter().initialize(this.routingOptions);
+        this.app.use(this.oas3Router);
 
         this.app.use(this.errorHandler);
     }
@@ -94,5 +104,14 @@ export class ExpressAppConfig {
 
     public getApp(): express.Application {
         return this.app;
+    }
+
+    public getMiddleware(): any {
+        return {
+            oas3UI: this.oas3UI,
+            oas3Metadata: this.oas3Metadata,
+            oas3Router: this.oas3Router,
+            oas3Validator: this.oas3Validator
+        };
     }
 }

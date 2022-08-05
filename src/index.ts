@@ -6,6 +6,7 @@ export function expressAppConfig(definitionPath: string, appOptions: Oas3AppOpti
   return new ExpressAppConfig(definitionPath, appOptions);
 }
 
-export function test(){
-  console.log('test');
+export function getMiddleware(definitionPath: string, appOptions: Oas3AppOptions): any {
+  let exp = new ExpressAppConfig(definitionPath, appOptions);
+  return exp.getMiddleware();
 }
